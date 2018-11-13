@@ -1,11 +1,11 @@
 lib_LTLIBRARIES = libgstwebrtc-@GST_API_VERSION@.la
 
-glib_enum_headers = dtlstransport.h icetransport.h rtptransceiver.h webrtc_fwd.h
+glib_enum_headers = dtlstransport.h icetransport.h rtptransceiver.h webrtc_fwd.h webrtc.h
 glib_enum_define = GST_WEBRTC
 glib_gen_prefix = gst_webrtc
 glib_gen_basename = webrtc
-glib_gen_decl_banner=GST_WEBRTC_API
-glib_gen_decl_include=\#include <gst/webrtc/webrtc_fwd.h>
+glib_gen_decl_banner=extern
+glib_gen_decl_include=\#include <webrtc_fwd.h>
 
 built_sources = webrtc-enumtypes.c
 built_headers = webrtc-enumtypes.h
@@ -74,8 +74,8 @@ GstWebRTC-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstwebrtc-@GST_API_
 		--add-include-path=$(top_builddir)/gst-libs \
 		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-1.0` \
 		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-sdp-1.0` \
+	        --library=libgstwebrtc-@GST_API_VERSION@.la \
 		--library-path=$(top_builddir)/gst-libs \
-		--library=libgstwebrtc-@GST_API_VERSION@.la \
 		--include=Gst-@GST_API_VERSION@ \
 		--include=GstSdp-@GST_API_VERSION@ \
 		--libtool="${LIBTOOL}" \
@@ -86,7 +86,7 @@ GstWebRTC-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstwebrtc-@GST_API_
 		-DGST_USE_UNSTABLE_API \
 		--output $@ \
 		$(gir_headers) \
-		$(gir_sources)
+		$(gir_sources); 		cat /repos/gst-plugins-bad/gst-libs/gst/webrtc/webrtc-enumtypes.{c,h}; cat gst/webrtc/webrtc.h
 
 # INTROSPECTION_GIRDIR/INTROSPECTION_TYPELIBDIR aren't the right place to
 # install anything - we need to install inside our prefix.

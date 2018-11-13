@@ -280,6 +280,12 @@ else
 SBC_DIR=
 endif
 
+if USE_SCTP
+SCTP_DIR=sctp
+else
+SCTP_DIR=
+endif
+
 if USE_SMOOTHSTREAMING
 SMOOTHSTREAMING_DIR = smoothstreaming
 else
@@ -448,6 +454,7 @@ SUBDIRS=\
 	$(OPUS_DIR) \
 	$(RSVG_DIR) \
 	$(SBC_DIR) \
+	$(SCTP_DIR) \
 	$(SMOOTHSTREAMING_DIR) \
 	$(SMOOTHWAVE_DIR) \
 	$(SNDFILE_DIR) \
@@ -515,6 +522,7 @@ DIST_SUBDIRS = \
 	rsvg \
 	resindvd \
 	sbc \
+	sctp \
 	smoothstreaming \
 	sndfile \
 	soundtouch \

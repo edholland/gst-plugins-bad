@@ -1,4 +1,4 @@
-have_registry = true # FIXME not get_option('disable_registry')
+have_registry = true # FIXME get_option('registry')
 
 libparser = static_library('parser',
   'elements/parser.c',
